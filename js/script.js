@@ -1,14 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
     const filterButtons = document.querySelectorAll('.filter-buttons button');
     const menuItems = document.querySelectorAll('.menu-item');
-    const resetButton = document.getElementById('reset-button'); // Select reset button
 
     // Display all items by default
     menuItems.forEach(item => item.style.display = 'block');
 
     filterButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            event.preventDefault(); // Prevent form submission
+        button.addEventListener('click', () => {
             const filter = button.getAttribute('data-filter');
 
             // Apply filtering logic
@@ -28,12 +26,34 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Reset button logic
-    resetButton.addEventListener('click', (event) => {
-        event.preventDefault(); // Prevent form submission
-        // Show all items
-        menuItems.forEach(item => item.style.display = 'block');
+    const resetButton = document.querySelector('.reset-button'); // Adjust selector as necessary
+    if (resetButton) {
+        resetButton.addEventListener('click', () => {
+            // Show all items
+            menuItems.forEach(item => item.style.display = 'block');
 
-        // Remove active class from all buttons
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-    });
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+        });
+    }
+
+    // Prevent form submission and handle custom logic
+    const form = document.querySelector('form');
+    if (form) {
+        form.addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent default form submission
+            console.log("Form submission prevented!");
+            
+            const email = document.getElementById('myform_email').value;
+            const phone = document.getElementById('myform_phone').value;
+            console.log(`Email: ${email}, Phone: ${phone}`);
+            
+            // Optional feedback to user
+            alert("Thank you for signing up for Promotions!");
+
+            // Reset the email and phone fields after submission
+            document.getElementById('myform_email').value = '';
+            document.getElementById('myform_phone').value = '';
+        });
+    }
 });
