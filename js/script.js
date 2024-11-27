@@ -1,12 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
     const filterButtons = document.querySelectorAll('.filter-buttons button');
     const menuItems = document.querySelectorAll('.menu-item');
+    const resetButton = document.getElementById('reset-button'); // Select reset button
 
     // Display all items by default
     menuItems.forEach(item => item.style.display = 'block');
 
     filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
+        button.addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent form submission
             const filter = button.getAttribute('data-filter');
 
             // Apply filtering logic
@@ -19,18 +21,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
 
-           // Update active class for buttons
+            // Update active class for buttons
             filterButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
         });
     });
 
     // Reset button logic
-    resetButton.addEventListener('click', () => {
+    resetButton.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevent form submission
         // Show all items
         menuItems.forEach(item => item.style.display = 'block');
 
         // Remove active class from all buttons
         filterButtons.forEach(btn => btn.classList.remove('active'));
     });
-}); 
+});
