@@ -19,9 +19,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
 
-            // Update active class for buttons
+           // Update active class for buttons
             filterButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
         });
     });
-});
+
+    // Reset button logic
+    resetButton.addEventListener('click', () => {
+        // Show all items
+        menuItems.forEach(item => item.style.display = 'block');
+
+        // Remove active class from all buttons
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+    });
+}); 
